@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Build-Jdk-Spec: 14
-Implementation-Title: JeeSite Web
-Implementation-Version: 4.2.2-SNAPSHOT
-Implementation-Vendor: JeeSite
-Main-Class: com.jeesite.modules.Application
-Created-By: Maven Integration for Eclipse
-
