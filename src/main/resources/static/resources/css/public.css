@@ -567,9 +567,9 @@ h2.method {
     height: 100%;
 }
 
-/*.loginBody {
-    background: url("../images/login_bg.jpg") no-repeat center center;
-}*/
+.loginBody {
+    background: url("../images/login-bg.png") no-repeat center center;
+}
 
 .loginBody form.layui-form {
     padding: 0 20px;
@@ -593,13 +593,13 @@ h2.method {
 .login_face {
     margin: -55px auto 20px;
     width: 100px;
-    height: 100px;
+    height: 100px;/*
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
     border: 5px solid #fff;
     overflow: hidden;
-    box-shadow: 0 0 30px #009688;
+    box-shadow: 0 0 30px #009688;*/
 }
 
 .login_face img {

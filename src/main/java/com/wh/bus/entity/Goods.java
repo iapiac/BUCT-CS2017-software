@@ -42,8 +42,6 @@ public class Goods implements Serializable {
 
     private Integer number;
 
-    private String goodsimg;
-
     private Integer available;
 
     private Integer providerid;

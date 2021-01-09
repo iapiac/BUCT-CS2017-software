@@ -68,12 +68,6 @@ public class GoodsController {
     @RequestMapping("addGoods")
     public ResultObj addGoods(GoodsVo goodsVo){
         try {
-            System.out.println("====================================");
-            System.out.println(goodsVo.getGoodsimg());
-            if (goodsVo.getGoodsimg()!=null&&goodsVo.getGoodsimg().endsWith("_temp")){
-                String newName = AppFileUtils.renameFile(goodsVo.getGoodsimg());
-                goodsVo.setGoodsimg(newName);
-            }
             goodsService.save(goodsVo);
             return ResultObj.ADD_SUCCESS;
         } catch (Exception e) {
@@ -90,17 +84,6 @@ public class GoodsController {
     @RequestMapping("updateGoods")
     public ResultObj updateGoods(GoodsVo goodsVo){
         try {
-            //商品图片不是默认图片
-            if (!(goodsVo.getGoodsimg()!=null&&goodsVo.getGoodsimg().equals(Constast.DEFAULT_IMG_GOODS))){
-
-                if (goodsVo.getGoodsimg().endsWith("_temp")){
-                    String newName = AppFileUtils.renameFile(goodsVo.getGoodsimg());
-                    goodsVo.setGoodsimg(newName);
-                    //删除原先的图片
-                    String oldPath = goodsService.getById(goodsVo.getId()).getGoodsimg();
-                    AppFileUtils.removeFileByPath(oldPath);
-                }
-            }
             goodsService.updateById(goodsVo);
             return ResultObj.UPDATE_SUCCESS;
         } catch (Exception e) {
@@ -115,11 +98,8 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("deleteGoods")
-    public ResultObj deleteGoods(Integer id,String goodsimg){
+    public ResultObj deleteGoods(Integer id){
         try {
-            //删除商品的图片
-            AppFileUtils.removeFileByPath(goodsimg);
-//            goodsService.removeById(id);
             goodsService.deleteGoodsById(id);
             return ResultObj.DELETE_SUCCESS;
         } catch (Exception e) {
