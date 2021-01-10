@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
-import com.wh.sys.common.Constast;
+import com.wh.sys.common.Constant;
 import com.wh.sys.realm.UserRealm;
 
 import javax.servlet.Filter;
@@ -42,7 +42,7 @@ public class ShiroAutoConfiguration {
     /**
      * 散列次数
      */
-    private int hashIterations = Constast.HASHITERATIONS;
+    private int hashIterations = Constant.HASHITERATIONS;
     /**
      * 默认的登陆页面
      */

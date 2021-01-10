@@ -10,7 +10,7 @@ import com.wh.bus.service.IGoodsService;
 import com.wh.bus.service.IProviderService;
 import com.wh.bus.vo.GoodsVo;
 import com.wh.sys.common.AppFileUtils;
-import com.wh.sys.common.Constast;
+import com.wh.sys.common.Constant;
 import com.wh.sys.common.DataGridView;
 import com.wh.sys.common.ResultObj;
 
@@ -115,7 +115,7 @@ public class GoodsController {
     @RequestMapping("loadAllGoodsForSelect")
     public DataGridView loadAllGoodsForSelect(){
         QueryWrapper<Goods> queryWrapper = new QueryWrapper<Goods>();
-        queryWrapper.eq("available",Constast.AVAILABLE_TRUE);
+        queryWrapper.eq("available",Constant.AVAILABLE_TRUE);
         List<Goods> list = goodsService.list(queryWrapper);
         for (Goods goods : list) {
             Provider provider = providerService.getById(goods.getProviderid());
@@ -134,7 +134,7 @@ public class GoodsController {
     @RequestMapping("loadGoodsByProviderId")
     public DataGridView loadGoodsByProviderId(Integer providerid){
         QueryWrapper<Goods> queryWrapper = new QueryWrapper<Goods>();
-        queryWrapper.eq("available",Constast.AVAILABLE_TRUE);
+        queryWrapper.eq("available",Constant.AVAILABLE_TRUE);
         queryWrapper.eq(providerid!=null,"providerid",providerid);
         List<Goods> list = goodsService.list(queryWrapper);
         for (Goods goods : list) {

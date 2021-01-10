@@ -1,7 +1,7 @@
 package com.wh.sys.common;
 
 
-public class Constast {
+public class Constant {
 
     /**
      * 状态码  正常 200  错误  -1

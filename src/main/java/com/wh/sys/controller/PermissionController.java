@@ -4,7 +4,7 @@ package com.wh.sys.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wh.sys.common.Constast;
+import com.wh.sys.common.Constant;
 import com.wh.sys.common.DataGridView;
 import com.wh.sys.common.ResultObj;
 import com.wh.sys.common.TreeNode;
@@ -39,7 +39,7 @@ public class PermissionController {
     @RequestMapping("loadPermissionManagerLeftTreeJson")
     public DataGridView loadPermissionManagerLeftTreeJson(PermissionVo permissionVo){
         QueryWrapper<Permission> queryWrapper = new QueryWrapper<Permission>();
-        queryWrapper.eq("type", Constast.TYPE_MENU);
+        queryWrapper.eq("type", Constant.TYPE_MENU);
         //查询出所有的权限，存放进list中
         List<Permission> list = permissionService.list(queryWrapper);
         List<TreeNode> treeNodes = new ArrayList<TreeNode>();
@@ -62,7 +62,7 @@ public class PermissionController {
         //进行模糊查询
         QueryWrapper<Permission> queryWrapper = new QueryWrapper<>();
         //只能查询权限
-        queryWrapper.eq("type",Constast.TYPE_PERMISSION);
+        queryWrapper.eq("type",Constant.TYPE_PERMISSION);
         queryWrapper.like(StringUtils.isNotBlank(permissionVo.getTitle()),"title",permissionVo.getTitle());
         queryWrapper.like(StringUtils.isNotBlank(permissionVo.getPercode()),"percode",permissionVo.getPercode());
         queryWrapper.eq(permissionVo.getId()!=null,"pid",permissionVo.getId());
@@ -82,7 +82,7 @@ public class PermissionController {
     public ResultObj addPermission(PermissionVo permissionVo){
         try {
             //设置添加类型为 permission
-            permissionVo.setType(Constast.TYPE_PERMISSION);
+            permissionVo.setType(Constant.TYPE_PERMISSION);
             permissionService.save(permissionVo);
             return ResultObj.ADD_SUCCESS;
         } catch (Exception e) {

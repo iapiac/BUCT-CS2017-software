@@ -52,7 +52,7 @@ public class UserController {
         queryWrapper.like(StringUtils.isNotBlank(userVo.getName()),"loginname",userVo.getName()).or().eq(StringUtils.isNotBlank(userVo.getName()),"name",userVo.getName());
         queryWrapper.like(StringUtils.isNotBlank(userVo.getAddress()),"address",userVo.getAddress());
         //查询系统用户
-        queryWrapper.eq("type", Constast.USER_TYPE_NORMAL);
+        queryWrapper.eq("type", Constant.USER_TYPE_NORMAL);
         queryWrapper.eq(userVo.getDeptid()!=null,"deptid",userVo.getDeptid());
         queryWrapper.orderByDesc("id");
         userService.page(page,queryWrapper);
@@ -105,8 +105,8 @@ public class UserController {
     public DataGridView loadUsersByDeptIp(Integer deptId){
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
         queryWrapper.eq(deptId!=null,"deptid",deptId);
-        queryWrapper.eq("available",Constast.AVAILABLE_TRUE);
-        queryWrapper.eq("type",Constast.USER_TYPE_NORMAL);
+        queryWrapper.eq("available",Constant.AVAILABLE_TRUE);
+        queryWrapper.eq("type",Constant.USER_TYPE_NORMAL);
         List<User> list = userService.list(queryWrapper);
         for (User user : list) {
             System.out.println(user.toString());
@@ -139,12 +139,12 @@ public class UserController {
     public ResultObj addUser(UserVo userVo){
         try {
             //设置类型
-            userVo.setType(Constast.USER_TYPE_NORMAL);
+            userVo.setType(Constant.USER_TYPE_NORMAL);
             //设置盐
             String salt = IdUtil.simpleUUID().toUpperCase();
             userVo.setSalt(salt);
             //设置默认密码
-            userVo.setPwd(new Md5Hash(Constast.USER_DEFAULT_PWD,salt,2).toString());
+            userVo.setPwd(new Md5Hash(Constant.USER_DEFAULT_PWD,salt,2).toString());
             userService.save(userVo);
             return ResultObj.ADD_SUCCESS;
         } catch (Exception e) {
@@ -224,7 +224,7 @@ public class UserController {
             String salt = IdUtil.simpleUUID().toUpperCase();
             user.setSalt(salt);
             //设置密码
-            user.setPwd(new Md5Hash(Constast.USER_DEFAULT_PWD,salt,2).toString());
+            user.setPwd(new Md5Hash(Constant.USER_DEFAULT_PWD,salt,2).toString());
             userService.updateById(user);
             return ResultObj.RESET_SUCCESS;
         } catch (Exception e) {
@@ -242,7 +242,7 @@ public class UserController {
     public DataGridView initRoleByUserId(Integer id){
         //1.查询所有可用的角色
         QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("available",Constast.AVAILABLE_TRUE);
+        queryWrapper.eq("available",Constant.AVAILABLE_TRUE);
         List<Map<String, Object>> listMaps = roleService.listMaps(queryWrapper);
         //2.查询当前用户拥有的角色ID集合
         List<Integer> currentUserRoleIds = roleService.queryUserRoleIdsByUid(id);
@@ -295,11 +295,11 @@ public class UserController {
         //2.1获得该用户的盐
         String salt = user1.getSalt();
         //2.2通过用户输入的原密码，从数据库中查出的盐，散列次数生成新的旧密码
-        String oldPassword2 = new Md5Hash(oldPassword,salt,Constast.HASHITERATIONS).toString();
+        String oldPassword2 = new Md5Hash(oldPassword,salt,Constant.HASHITERATIONS).toString();
         if (oldPassword2.equals(user1.getPwd())){
             if (newPwdOne.equals(newPwdTwo)){
                 //3.生成新的密码
-                String newPassword = new Md5Hash(newPwdOne,salt,Constast.HASHITERATIONS).toString();
+                String newPassword = new Md5Hash(newPwdOne,salt,Constant.HASHITERATIONS).toString();
                 user1.setPwd(newPassword);
                 userService.updateById(user1);
                 return ResultObj.UPDATE_SUCCESS;

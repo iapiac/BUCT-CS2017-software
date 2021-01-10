@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wh.bus.entity.Customer;
 import com.wh.bus.service.ICustomerService;
 import com.wh.bus.vo.CustomerVo;
-import com.wh.sys.common.Constast;
+import com.wh.sys.common.Constant;
 import com.wh.sys.common.DataGridView;
 import com.wh.sys.common.ResultObj;
 
@@ -106,7 +106,7 @@ public class CustomerController {
     @RequestMapping("loadAllCustomerForSelect")
     public DataGridView loadAllCustomerForSelect(){
         QueryWrapper<Customer> queryWrapper = new QueryWrapper<Customer>();
-        queryWrapper.eq("available", Constast.AVAILABLE_TRUE);
+        queryWrapper.eq("available", Constant.AVAILABLE_TRUE);
         List<Customer> list = customerService.list(queryWrapper);
         return new DataGridView(list);
     }

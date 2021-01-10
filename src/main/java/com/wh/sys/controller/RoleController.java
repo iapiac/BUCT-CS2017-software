@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wh.sys.common.Constast;
+import com.wh.sys.common.Constant;
 import com.wh.sys.common.DataGridView;
 import com.wh.sys.common.ResultObj;
 import com.wh.sys.common.TreeNode;
@@ -113,7 +113,7 @@ public class RoleController {
     public DataGridView initPermissionByRoleId(Integer roleId){
         //查询所有可用的菜单和权限
         QueryWrapper<Permission> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("available", Constast.AVAILABLE_TRUE);
+        queryWrapper.eq("available", Constant.AVAILABLE_TRUE);
         List<Permission> allPermissions = permissionService.list(queryWrapper);
         //1.首先根据角色id查询出当前角色所拥有的所有菜单的ID和权限的ID
         List<Integer> currentRolePermissions = roleService.queryRolePermissionIdsByRid(roleId);
